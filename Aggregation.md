@@ -1,6 +1,6 @@
 ## Questions
 
-### Question 1
+
 
 Data: 
 ```javascript
@@ -8,8 +8,8 @@ Data:
    _id: ObjectId(7df78ad8902c)
    title: 'MongoDB Overview', 
    description: 'MongoDB is no sql database',
-   by_user: 'tutorials point',
-   url: 'http://www.tutorialspoint.com',
+   by_user: 'abc',
+   url: 'http://www.abc.com',
    tags: ['mongodb', 'database', 'NoSQL'],
    likes: 100
 },
@@ -17,8 +17,8 @@ Data:
    _id: ObjectId(7df78ad8902d)
    title: 'NoSQL Overview', 
    description: 'No sql database is very fast',
-   by_user: 'tutorials point',
-   url: 'http://www.tutorialspoint.com',
+   by_user: 'abc',
+   url: 'http://www.abc.com',
    tags: ['mongodb', 'database', 'NoSQL'],
    likes: 10
 },
@@ -31,4 +31,13 @@ Data:
    tags: ['neo4j', 'database', 'NoSQL'],
    likes: 750
 }
+```
+### Question 1
+
+- Display a list stating how many tutorials are written by each user, then you will use the following aggregate() method −
+
+
+#### Answer
+```javascript
+db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
 ```

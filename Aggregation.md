@@ -1,4 +1,7 @@
-## Questions
+# Questions
+
+## Group:
+
 ### Data 1: 
 ```javascript
 db.posts.insertMany([
@@ -74,7 +77,7 @@ db.sales.aggregate([{
 
 - Calculate the total price and the average quantity as well as counts for all documents in the collection
 
-##### Expected Output:
+##### :bulb: Expected Output:
 
 ```javascript
 { "_id" : null, "totalPrice" : 290, "averageQuantity" : 8.6, "count" : 5 }
@@ -96,3 +99,31 @@ db.sales.aggregate(
    ]
 )
 ```
+
+
+### Question 4
+
+- Group the documents by the item to retrieve the distinct item values
+
+#### Answer:
+```javascript
+db.sales.aggregate( [ { $group : { _id : "$item" } } ] )
+```
+## Unwind:
+Consider an inventory with the following document:
+```javascript
+{ "_id" : 1, "item" : "ABC1", sizes: [ "S", "M", "L"] }
+```
+
+The following aggregation uses the $unwind stage to output a document for each element in the sizes array:
+```javascript
+db.inventory.aggregate( [ { $unwind : "$sizes" } ] )
+```
+
+Output:
+```javascript
+{ "_id" : 1, "item" : "ABC1", "sizes" : "S" }
+{ "_id" : 1, "item" : "ABC1", "sizes" : "M" }
+{ "_id" : 1, "item" : "ABC1", "sizes" : "L" }
+```
+

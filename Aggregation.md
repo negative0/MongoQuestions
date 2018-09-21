@@ -56,7 +56,7 @@ db.sales.insertMany([
 
 - Write an aggregate query to calculate the Average cost per item (price * quantity)
 
-- :bulb: Use $multiply \[ a , b \]
+- :bulb: Use $multiply: \[ a , b \] and $avg.
 
 ```javascript
 db.sales.aggregate([{

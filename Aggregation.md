@@ -1,11 +1,9 @@
 ## Questions
-
-
-
-Data: 
+### Data 1: 
 ```javascript
+db.posts.insertMany([
   {
-   _id: ObjectId(7df78ad8902c)
+   
    title: 'MongoDB Overview', 
    description: 'MongoDB is no sql database',
    by_user: 'abc',
@@ -14,7 +12,7 @@ Data:
    likes: 100
 },
 {
-   _id: ObjectId(7df78ad8902d)
+
    title: 'NoSQL Overview', 
    description: 'No sql database is very fast',
    by_user: 'abc',
@@ -23,7 +21,7 @@ Data:
    likes: 10
 },
 {
-   _id: ObjectId(7df78ad8902e)
+
    title: 'Neo4j Overview', 
    description: 'Neo4j is no sql database',
    by_user: 'Neo4j',
@@ -31,6 +29,7 @@ Data:
    tags: ['neo4j', 'database', 'NoSQL'],
    likes: 750
 }
+]);
 ```
 ### Question 1
 
@@ -40,4 +39,30 @@ Data:
 #### Answer
 ```javascript
 db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
+```
+### Data 2:
+Sales Collection
+```javascript
+db.sales.insertMany([ 
+  { "_id" : 1, "item" : "abc", "price" : 10, "quantity" : 2, "date" : ISODate("2014-03-01T08:00:00Z") },
+  { "_id" : 2, "item" : "jkl", "price" : 20, "quantity" : 1, "date" : ISODate("2014-03-01T09:00:00Z") },
+  { "_id" : 3, "item" : "xyz", "price" : 5, "quantity" : 10, "date" : ISODate("2014-03-15T09:00:00Z") },
+  { "_id" : 4, "item" : "xyz", "price" : 5, "quantity" : 20, "date" : ISODate("2014-04-04T11:21:39.736Z") },
+  { "_id" : 5, "item" : "abc", "price" : 10, "quantity" : 10, "date" : ISODate("2014-04-04T21:23:13.331Z") }
+]);
+```
+
+### Question 2
+
+- Write an aggregate query to calculate the Average cost per item (price * quantity)
+
+- :bulb: Use $multiply \[ a , b \]
+
+```javascript
+db.sales.aggregate([{
+    $group: { 
+        "_id":  "$item" ,
+        "avg_cost":{ $avg: {$multiply: ["$price", "$quantity"]}}
+    }
+}]);
 ```

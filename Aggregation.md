@@ -76,13 +76,13 @@ db.sales.aggregate([{
 
 ##### Expected Output:
 
-```
+```javascript
 { "_id" : null, "totalPrice" : 290, "averageQuantity" : 8.6, "count" : 5 }
 
 ```
 
 #### Answer:
-```
+```javascript
 db.sales.aggregate(
    [
       {

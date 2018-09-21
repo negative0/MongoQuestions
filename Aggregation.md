@@ -126,4 +126,22 @@ Output:
 { "_id" : 1, "item" : "ABC1", "sizes" : "M" }
 { "_id" : 1, "item" : "ABC1", "sizes" : "L" }
 ```
+## $limit
+Limits the number of documents passed to the next stage in the pipeline.
+
+The $limit stage has the following prototype form:
+```javascript
+{ $limit: <positive integer> }
+```
+$limit takes a positive integer that specifies the maximum number of documents to pass along.
+
+Example
+Consider the following example:
+```javascript
+db.article.aggregate(
+    { $limit : 5 }
+);
+```
+This operation returns only the first 5 documents passed to it by the pipeline. $limit has no effect on the content of the documents it passes.
+
 

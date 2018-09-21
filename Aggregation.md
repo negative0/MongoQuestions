@@ -58,6 +58,9 @@ db.sales.insertMany([
 
 - :bulb: Use $multiply: \[ a , b \] and $avg.
 
+
+
+#### Answer:
 ```javascript
 db.sales.aggregate([{
     $group: { 
@@ -65,4 +68,31 @@ db.sales.aggregate([{
         "avg_cost":{ $avg: {$multiply: ["$price", "$quantity"]}}
     }
 }]);
+```
+
+### Question 3
+
+- Calculate the total price and the average quantity as well as counts for all documents in the collection
+
+##### Expected Output:
+
+```
+{ "_id" : null, "totalPrice" : 290, "averageQuantity" : 8.6, "count" : 5 }
+
+```
+
+#### Answer:
+```
+db.sales.aggregate(
+   [
+      {
+        $group : {
+           _id : null,
+           totalPrice: { $sum: { $multiply: [ "$price", "$quantity" ] } },
+           averageQuantity: { $avg: "$quantity" },
+           count: { $sum: 1 }
+        }
+      }
+   ]
+)
 ```
